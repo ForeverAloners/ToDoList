@@ -10,7 +10,7 @@ type PropsType = {
     tasks: Array<TasksType>
 }
 
-export function Todolist(props: any) {
+export function Todolist(props: PropsType) {
     return (
         <div>
             <h3>{props.title}</h3>
