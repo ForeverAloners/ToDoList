@@ -1,41 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Button} from "./components/button/button";
+import { TasksType, Todolist} from "./Todolist";
 
 function App() {
-    // const alertMessage = (message: string) => {
-    //     alert(message)
-    // }
-const todolistTitle = "What to learn"
-    const tasks = [
-        {id:"1",title:"Html",isDone:true},
-        {id:"2",title:"Css",isDone:true},
-        {id:"3",title:"JS",isDone:false},
-        {id:"4",title:"Pyton",isDone:false},
+
+    let tasks1:Array<TasksType> = [
+        {id: 1, title:"Css", isDone: true},
+        {id: 2, title:"JS", isDone: true},
+        {id: 3, title:"React", isDone: false}
+    ]
+    let tasks2 = [
+        {id: 1, title:"Terminator", isDone: true},
+        {id: 2, title:"Wolf", isDone: true},
+        {id: 3, title:"Transformer", isDone: false}
     ]
     return (
         <div className="App">
-            <div>Hello</div>
-            <h1>{todolistTitle}</h1>
-            <ul>
-                <li>
-                    <span>{tasks[0].title}</span>
-                    <input type="checkbox" checked={tasks[0].isDone}/>
-                </li>
-                <li>
-                    <span>{tasks[1].title}</span>
-                    <input type="checkbox" checked={tasks[1].isDone}/>
-                </li>
-                <li>
-                    <span>{tasks[2].title}</span>
-                    <input type="checkbox" checked={tasks[2].isDone}/>
-                </li>
-                <li>
-                    <span>{tasks[3].title}</span>
-                    <input type="checkbox" checked={tasks[3].isDone}/>
-                </li>
-            </ul>
+            <Todolist title="What to learn" tasks={tasks1}/>
+            <Todolist title="Movies" tasks={tasks2}/>
         </div>
     );
 }
