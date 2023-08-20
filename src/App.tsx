@@ -11,16 +11,22 @@ function App() {
         {id: v1(), title: "Redux", isDone: false}
     ]);
     let [filter, setFilter] = useState<filterValuesType>("all");
-
     function removeTask(id: string) {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks);
     }
-
     function addTasks(title: string) {
         let newTask = {id: v1(), title: title, isDone: false};
         let newTasks = [newTask, ...tasks];
         setTasks(newTasks);
+    }
+
+    function changeStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find ( t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+        }
+        setTasks([...tasks]);
     }
 
     function changeFilter(value: filterValuesType) {
@@ -42,6 +48,8 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTasks={addTasks}
+                      changeTaskStatus={changeStatus}
+                      filter={filter}
             />
         </div>
     );
