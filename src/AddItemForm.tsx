@@ -1,7 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button, TextField} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import {ControlPoint} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
-    addItem: (title: string, todolistId: string) => void
+    addItem: (title: string, ) => void
 }
 
 export function AddItemForm(props: AddItemFormPropsType) {
@@ -11,15 +14,16 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     const onNewTittleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
+    }
         const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
             setError(null);
             if (e.charCode === 13) {
                 addTasks();
             }
-
+        }
             const addTasks = () => {
                 if (newTaskTitle.trim() !== "") {
-                    props.addItem(newTaskTitle.trim(), props.id);
+                    props.addItem(newTaskTitle.trim());
                     setNewTaskTitle("");
                 } else {
                     setError("Title is required")
@@ -27,14 +31,16 @@ export function AddItemForm(props: AddItemFormPropsType) {
             }
 
             return <div>
-                <input value={newTaskTitle}
+                <TextField value={newTaskTitle}
+                           variant={"outlined"}
+                           label={"Type Value"}
                        onChange={onNewTittleChangeHandler}
                        onKeyPress={onKeyPressHandler}
-                       className={error ? "error" : ''}
+                       error={!!error}
+                           helperText={error}
                 />
-                <button onClick={addTasks}>+</button>
-                {error && <div className="error-message">{error}</div>}
+                <IconButton onClick={addTasks}  color={"primary"}  >
+                    <ControlPoint/>
+                </IconButton>
             </div>
         }
-    }
-}
